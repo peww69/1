@@ -13,6 +13,7 @@
           <UButton
               color="neutral"
               to="https://tzproject.com/"
+              target="_blank"
               variant="outline"
               icon="i-local-tz"
           >
@@ -22,7 +23,8 @@
           <UButton
               color="neutral"
               variant="outline"
-              to="https://youtube.com/"
+              target="_blank"
+              to="https://youtube.com/@pew-if5iu"
               icon="i-simple-icons-youtube"
           >
             YouTube
