@@ -15,8 +15,8 @@
               to="https://tzproject.com/"
               target="_blank"
               variant="outline"
-              icon="i-local-tz"
           >
+            <NuxtImg src="/tz-colour.png" width="20" height="20"/>
             TZ Project
           </UButton>
 
