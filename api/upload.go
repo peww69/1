@@ -34,7 +34,7 @@ func UploadImage(w http.ResponseWriter, r *http.Request) {
 
 			defer formFile.Close()
 
-			file, err := client.Put("pew-blob/"+header.Filename, formFile, blob.PutCommandOptions{AddRandomSuffix: true})
+			file, err := client.Put("images/"+header.Filename, formFile, blob.PutCommandOptions{AddRandomSuffix: true})
 			if err != nil {
 				w.WriteHeader(http.StatusBadRequest)
 			}
