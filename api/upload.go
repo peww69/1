@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -12,20 +13,18 @@ func UploadImage(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
 
-	err := r.ParseForm()
+	err := r.ParseMultipartForm(0)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 	}
 
-	if r.PostForm.Has("api_key") {
-		key := r.PostForm.Get("api_key")
+	if r.Form.Has("api_key") {
+		key := r.Form.Get("api_key")
 		// TODO: check key against DB
-
 		keyToMatch := os.Getenv("IMG_UPLOAD_API_KEY")
-		if keyToMatch == "" {
-			keyToMatch = "hazz1233"
-		}
+
 		if key == keyToMatch {
+			fmt.Println("Key handshake successful")
 			client := blob.NewVercelBlobClient()
 			formFile, header, err := r.FormFile("uploadFile")
 			if err != nil {
@@ -41,5 +40,12 @@ func UploadImage(w http.ResponseWriter, r *http.Request) {
 
 			w.Write([]byte(file.URL))
 		}
+	} else {
+		fmt.Println("No key provided in request")
+		for k, v := range r.Form {
+			fmt.Printf("Key: %s   Values: %#v\n", k, v)
+		}
 	}
+
+	w.WriteHeader(http.StatusBadRequest)
 }
