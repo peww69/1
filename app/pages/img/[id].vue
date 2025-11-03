@@ -1,1 +1,3 @@
-<template><div class="container"><img :src="`/img/${$route.params.id}.jpg`" alt="Image" class="img-fluid" /></div></template>
+<template>
+
+</template>
