@@ -38,7 +38,8 @@ func UploadImage(w http.ResponseWriter, r *http.Request) {
 				w.WriteHeader(http.StatusBadRequest)
 			}
 
-			w.Write([]byte(file.URL))
+			w.WriteHeader(http.StatusOK)
+			w.Write([]byte(file.Pathname))
 		}
 	} else {
 		fmt.Println("No key provided in request")
